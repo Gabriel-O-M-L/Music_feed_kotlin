@@ -7,6 +7,7 @@ open class Artista {
     var albuns = mutableListOf<Album>()
     var musicas = mutableListOf<Musica>()
     var id: Int? = null
+    var nacionalidade: String? = null
 
     fun criarMusica(nome: String, link: String): Musica {
         var musica: Musica = Musica()

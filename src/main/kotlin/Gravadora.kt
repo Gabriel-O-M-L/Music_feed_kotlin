@@ -5,14 +5,14 @@ class Gravadora {
 
     var artistas = mutableListOf<Artista>()
 
-    fun cadastrarArtista(nome: String): Artista {
+    fun cadastrarArtista(nome: String, nacionalidade: String): Artista {
         var artista: Artista = Artista()
+
         val geradorDeNumerosRandomicos = Random(4645)
 
         artista.id = geradorDeNumerosRandomicos.nextInt()
         artista.nome = nome
-
-
+        artista.nacionalidade = nacionalidade
         artistas.add(artista)
         return artista
     }
