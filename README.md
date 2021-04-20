@@ -49,28 +49,47 @@ As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
 
 ARTISTA:
 nome: String,
+
 nacionalidade: String,
+
 foto: String,
+
 descricao: String
 
 ALBUM:
+
 nome: String,
+
 link: String,
+
 genero: String,
+
 duracao: String,
+
 produtor: String,
+
 compositores: String
+
 descricao: String,
+
 capa: String,
+
 artistaID: Int
 
 MUSICA:
+
 artistaID: Int,
+
 nome: String,
+
 link: String,
+
 duracao: String,
+
 produtor: String,
+
 descricao: String,
+
 albumID: Int
 
 ## Sintaxe do JSON para editar objetos
@@ -78,36 +97,59 @@ albumID: Int
 ARTISTA:
 
 nome: String,
+
 artistaID: Int,
+
 nacionalidade: String,
+
 descricao: String,
+
 foto: String,
+
 link: String
 
 ALBUM:
 
 nome: String,
+
 link: String,
+
 editID: Int, = ID do objeto a ser ligado a o objeto que vai ser editado
+
 objectID: Int, = ID do objeto a ser editado
+
 genero: String,
+
 descricao: String,
+
 compositores: String,
+
 duracao: String,
+
 produtor: String,
+
 capa: String
 
 MUSICA:
 
 nome: String,
+
 link: String,
+
 editID: Int,
+
 objectID: Int,
+
 genero: String,
+
 descricao: String,
+
 compositores: String,
+
 duracao: String,
+
 produtor: String,
+
 capa: String
 
 ## Sintaxe do JSON para deletar Objetos
