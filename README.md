@@ -47,7 +47,7 @@ As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
 
 ## Sintaxe do JSON para criar objetos
 
-##ARTISTA:
+## ARTISTA:
 
 nome: String,
 
@@ -57,7 +57,7 @@ foto: String,
 
 descricao: String
 
-##ALBUM:
+## ALBUM:
 
 nome: String,
 
@@ -77,7 +77,7 @@ capa: String,
 
 artistaID: Int
 
-##MUSICA:
+## MUSICA:
 
 artistaID: Int,
 
@@ -95,7 +95,7 @@ albumID: Int
 
 ## Sintaxe do JSON para editar objetos
 
-##ARTISTA:
+## ARTISTA:
 
 nome: String,
 
@@ -109,7 +109,7 @@ foto: String,
 
 link: String
 
-##ALBUM:
+## ALBUM:
 
 nome: String,
 
@@ -131,7 +131,7 @@ produtor: String,
 
 capa: String
 
-##MUSICA:
+## MUSICA:
 
 nome: String,
 
@@ -155,12 +155,12 @@ capa: String
 
 ## Sintaxe do JSON para deletar Objetos
 
-#ARTISTA:
+## ARTISTA:
 objectID: Int
 
-#ALBUM:
+## ALBUM:
 objectID: Int
 
-#MUSICA:
+## MUSICA:
 objectID: Int
 
