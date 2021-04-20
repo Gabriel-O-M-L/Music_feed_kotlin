@@ -91,7 +91,7 @@ produtor: String,
 
 descricao: String,
 
-albumID: Int
+albumID: Int = ID do album a ser ligado a musica
 
 ## Sintaxe do JSON para editar objetos
 
@@ -99,7 +99,7 @@ albumID: Int
 
 nome: String,
 
-artistaID: Int,
+artistaID: Int, = ID do artisat a ser editado
 
 nacionalidade: String,
 
