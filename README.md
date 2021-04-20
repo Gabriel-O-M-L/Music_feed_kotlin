@@ -22,16 +22,27 @@ As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
 
 ## Rotas
 "POST - /artista/criar                   - Criar Artista"
+
 "POST - /album/criar                     - Criar Album"
+
 "POST - /musica/criar                    - Criar Musica"
+
 "PATCH - /artista/editar                 - Editar Artista"
+
 "PATCH - /album/editar                   - Editar ALbum"
+
 "PATCH - /musica/editar                  - Editar Musica"
+
 "DELETE - /artista/deletar               - Deletar Artista"
+
 "DELETE - /album/deletar                 - Deletar Album"
+
 "DELETE - /musica/deletar                - Deletar Musica"
+
 "GET - /artista/listar                   - Listar Artista"
+
 "GET - /album/listar                     - Listar Album"
+
 "GET - /musica/listar                    - Listar Musica"
 
 ## Sintaxe do JSON para criar objetos
