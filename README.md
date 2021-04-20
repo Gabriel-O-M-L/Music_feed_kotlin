@@ -75,7 +75,7 @@ descricao: String,
 
 capa: String,
 
-artistaID: Int = ID do aqrtista a ser editado
+artistaID: Int = ID do artista a ser editado
 
 ## MUSICA:
 
