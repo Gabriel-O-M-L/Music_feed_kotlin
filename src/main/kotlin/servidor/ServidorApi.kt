@@ -9,9 +9,9 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.html.*
-import music.Artista
-import music.Album
-import music.Musica
+import banco.artista.Artista
+import banco.lancamento.album.Album
+import banco.lancamento.musica.Musica
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -72,18 +72,18 @@ fun Route.meuindex() {
                 h1 { +"API de Gravadora 1.0" }
                 p { +"Tente chamar os outros endpoints para executar operações" }
                 ul {
-                    ol { +"POST - /artistas/criar                - Criar Artista" }
-                    ol { +"POST - /album/criar                   - Criar Album" }
-                    ol { +"POST - /musica/criar                   - Criar Artista" }
-                    ol { +"PATCH - /artistas/editar               - Editar Artista" }
-                    ol { +"PATCH - /album/editar                   - Editar Artista" }
-                    ol { +"PATCH - /musica/editar                  - Editar Artista" }
-                    ol { +"DELETE - /artistas/deletar              - Deletar Artista" }
-                    ol { +"DELETE - /album/deletar                  - Deletar Album" }
-                    ol { +"DELETE - /musica/deletar                 - Deletar Artista" }
-                    ol { +"GET - /artistas                       - Listar Artista" }
-                    ol { +"GET - /album                          - Listar Album" }
-                    ol { +"GET - /musicas                        - Listar Artista" }
+                    ol { +"POST - /artista/criar                  - Criar Artista" }
+                    ol { +"POST - /album/criar                     - Criar Album" }
+                    ol { +"POST - /musica/criar                    - Criar Musica" }
+                    ol { +"PATCH - /artista/editar                - Editar Artista" }
+                    ol { +"PATCH - /album/editar                   - Editar Album" }
+                    ol { +"PATCH - /musica/editar                  - Editar Musica" }
+                    ol { +"DELETE - /artista/deletar              - Deletar Artista" }
+                    ol { +"DELETE - /album/deletar                 - Deletar Album" }
+                    ol { +"DELETE - /musica/deletar                - Deletar Musica" }
+                    ol { +"GET - /artista/listar                  - Listar Artista" }
+                    ol { +"GET - /album/listar                     - Listar Album" }
+                    ol { +"GET - /musica/listar                   - Listar Musica" }
                 }
             }
         }
@@ -91,20 +91,21 @@ fun Route.meuindex() {
 }
 
 fun Route.criarArtista() {
-    post("/artistas/criar") {
+    post("/artista/criar") {
         val artistaParaCriar: Artista = call.receive<Artista>()
         val artistaCriado = gravadora.cadastrarArtista(
             artistaParaCriar.nome!!,
             artistaParaCriar.nacionalidade!!,
             artistaParaCriar.foto!!,
-            artistaParaCriar.descricao!!
+            artistaParaCriar.descricao!!,
+            artistaParaCriar.link!!
         )
         call.respond(artistaCriado)
     }
 }
 
 fun Route.criarAlbum() {
-    post("/artistas/album") {
+    post("/album/criar") {
         val albumParaCriar: Album = call.receive<Album>()
         val albumCriado = gravadora.criarAlbum(
             albumParaCriar.nome!!,
@@ -112,6 +113,7 @@ fun Route.criarAlbum() {
             albumParaCriar.genero!!,
             albumParaCriar.duracao!!,
             albumParaCriar.produtor!!,
+            albumParaCriar.compositores!!,
             albumParaCriar.descricao!!,
             albumParaCriar.capa!!,
             albumParaCriar.artistaID!!
@@ -121,7 +123,7 @@ fun Route.criarAlbum() {
 }
 
 fun Route.criarMusica() {
-    post("/artistas/musica") {
+    post("/musica/criar") {
         val musicaParaCriar: Musica = call.receive<Musica>()
         val musicaCriada = gravadora.criaMusica(
             musicaParaCriar.artistaID!!,
@@ -137,7 +139,7 @@ fun Route.criarMusica() {
 }
 
 fun Route.editarArtista() {
-    patch("/artistas/editar ") {
+    patch("/artista/editar") {
         val artistaParaEditar: Artista = call.receive<Artista>()
         val artistaEditado = gravadora.editArtista(
             artistaParaEditar.nome!!,
@@ -152,12 +154,12 @@ fun Route.editarArtista() {
 }
 
 fun Route.editarAlbum() {
-    patch("/artistas/editar ") {
+    patch("/album/editar") {
         val albumParaEditar: Album = call.receive<Album>()
         val albumEditado = gravadora.editAlbum(
             albumParaEditar.nome!!,
             albumParaEditar.link!!,
-            albumParaEditar.idAlbum!!,
+            albumParaEditar.artistaID!!,
             albumParaEditar.albumID!!,
             albumParaEditar.genero!!,
             albumParaEditar.descricao!!,
@@ -190,7 +192,7 @@ fun Route.editarMusica() {
 }
 
 fun Route.deletarArtista() {
-    delete("/artistas/deletar") {
+    delete("/artista/deletar") {
         val artistaParaDeletar: Artista = call.receive<Artista>()
         val artistaDeletado = gravadora.deleteArtista(
             artistaParaDeletar.idArtista!!
@@ -220,19 +222,19 @@ fun Route.deletarMusica() {
 }
 
 fun Route.listarAlbum() {
-    get("/album ") {
+    get("/album/listar") {
         call.respond(gravadora.lista.albunsMutableList)
     }
 }
 
 fun Route.listarArtista() {
-    get("/artistas") {
+    get("/artista/listar") {
         call.respond(gravadora.lista.artistasMutableList)
     }
 }
 
 fun Route.listarMusica() {
-    get("/musica") {
+    get("/musica/listar") {
         call.respond(gravadora.lista.musicasMutableList)
     }
 }
