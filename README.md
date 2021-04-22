@@ -53,6 +53,8 @@ nome: String,
 
 nacionalidade: String,
 
+link: String,
+
 foto: String,
 
 descricao: String
