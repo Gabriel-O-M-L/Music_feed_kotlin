@@ -43,7 +43,7 @@ class AdministraConta {
         idfinderUsuario?.musicasMutableList?.add(artistaID)
     }
 
-    // TODO FUNCTION RECOMEND
+    /* TODO FUNCTION RECOMEND
     fun recomendMusica(idUser: Int, lista: Listagem) {
         var idfinderUsuario: Conta? = contasMutableList.find { it.userId == idUser }
         var primeiro: String? = null
@@ -67,4 +67,5 @@ class AdministraConta {
         }
 
     }
+     */
 }
