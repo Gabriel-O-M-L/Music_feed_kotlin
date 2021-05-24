@@ -1,46 +1,38 @@
-import banco.Conta
+import account.Login
+import account.Profile
 import banco.listas.Listagem
-import kotlin.random.Random
 
 class AdministraConta {
 
-    var contasMutableList = mutableListOf<Conta>()
-    var geradorDeNumerosRandomicos = Random(4665)
+    var contas = mutableListOf<Profile>()
+    var objectLogin: Login = Login()
 
-    fun cadastraUsuario(nome: String, senha: String): Conta {
-        var novoUsuario: Conta = Conta()
+    fun cadastraUsuario(name: String, email: String, senha: String) {
+        var p = Profile(name = name, email = email, senha = senha)
 
-        novoUsuario.userId = geradorDeNumerosRandomicos.nextInt()
-        novoUsuario.nome = nome
-        novoUsuario.senha = senha
-
-        contasMutableList.add(novoUsuario)
-        return novoUsuario
+        objectLogin.login(email, senha, contas)
+        contas.add(p)
     }
 
+
     fun editUser(idUser: Int, senha: String) {
-        var idfinderUsuario: Conta? = contasMutableList.find { it.userId == idUser }
-        idfinderUsuario?.senha = senha
+        //TODO
     }
 
     fun deletaUsuario(objectID: Int) {
-        val idFinderUsuario: Conta? = contasMutableList.find { it.userId == objectID }
-        contasMutableList.remove(idFinderUsuario)
+        //TODO
     }
 
     fun gostarMusica(musicID: Int, lista: Listagem, idUser: Int) {
-        var idfinderUsuario: Conta? = contasMutableList.find { it.userId == idUser }
-        idfinderUsuario?.musicasMutableList?.add(musicID)
+        //TODO
     }
 
     fun gostarAlbum(albumID: Int, lista: Listagem, idUser: Int) {
-        var idfinderUsuario: Conta? = contasMutableList.find { it.userId == idUser }
-        idfinderUsuario?.musicasMutableList?.add(albumID)
+        //TODO
     }
 
     fun gostarArtista(artistaID: Int, lista: Listagem, idUser: Int) {
-        var idfinderUsuario: Conta? = contasMutableList.find { it.userId == idUser }
-        idfinderUsuario?.musicasMutableList?.add(artistaID)
+        //TODO
     }
 
     /* TODO FUNCTION RECOMEND

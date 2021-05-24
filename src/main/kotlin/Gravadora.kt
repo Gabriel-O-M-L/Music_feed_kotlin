@@ -1,51 +1,16 @@
-<<<<<<< Updated upstream
-import music.Artista
-=======
-<<<<<<< Updated upstream
-import music.Artista
-=======
 import banco.lancamento.album.Album
 import banco.artista.Artista
 import banco.lancamento.musica.Musica
 import banco.listas.Listagem
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import kotlin.random.Random
 
 class Gravadora {
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-    var artistas = mutableListOf<Artista>()
-
-    fun cadastrarArtista(nome: String, nacionalidade: String): Artista {
-        var artista: Artista = Artista()
-
-        val geradorDeNumerosRandomicos = Random(4645)
-
-        artista.id = geradorDeNumerosRandomicos.nextInt()
-        artista.nome = nome
-        artista.nacionalidade = nacionalidade
-        artistas.add(artista)
-        return artista
-    }
-//  fun DeleteArtista(nome: String){
-//    artistas.remove(nome)
-//  }
-//  fun EditArtista(nome: String){
-
-//  }
-
-<<<<<<< Updated upstream
-=======
-=======
     var lista: Listagem = Listagem()
     var objectArtista: Artista = Artista()
     var objectAlbum: Album = Album()
     var objectMusica: Musica = Musica()
-    val geradorDeNumerosRandomicos = Random(4665)
+    var geradorDeNumerosRandomicos = Random(4665)
 
 
     fun cadastrarArtista(nome: String, nacionalidade: String, foto: String, descricao: String,link : String): Artista {
@@ -198,6 +163,6 @@ class Gravadora {
         val idFinderMusica: Musica? = lista.musicasMutableList.find { it.idMusica == objectID }
         lista.musicasMutableList.remove(idFinderMusica)
     }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
+
 }
