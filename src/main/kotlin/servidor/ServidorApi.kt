@@ -9,17 +9,9 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.html.*
-<<<<<<< Updated upstream
-import music.Artista
-=======
-<<<<<<< Updated upstream
-import music.Artista
-=======
 import banco.artista.Artista
 import banco.lancamento.album.Album
 import banco.lancamento.musica.Musica
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -59,12 +51,6 @@ fun Application.Gravadora(testing: Boolean = false) {
     routing {
         meuindex()
         criarArtista()
-<<<<<<< Updated upstream
-        listarArtista()
-=======
-<<<<<<< Updated upstream
-        listarArtista()
-=======
         criarAlbum()
         criarMusica()
         editarArtista()
@@ -76,8 +62,6 @@ fun Application.Gravadora(testing: Boolean = false) {
         listarArtista()
         listarAlbum()
         listarMusica()
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     }
 }
 
@@ -88,19 +72,6 @@ fun Route.meuindex() {
                 h1 { +"API de Gravadora 1.0" }
                 p { +"Tente chamar os outros endpoints para executar operações" }
                 ul {
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-                    ol { +"POST - /artistas                - Criar um Artista" }
-                    ol { +"POST - /artistas/album        - Cria album" }
-                    ol { +"POST - /artistas/musica    - Cria musica" }
-                    ol { +"GET - /artistas                - Listar todas os Artistas" }
-                    ol { +"GET - /artista/Album        - Lista Album do Artista " }
-                    ol { +"GET - /artista/musica        - Lista musicas do Artista " }
-<<<<<<< Updated upstream
-=======
-=======
                     ol { +"POST - /artista/criar                  - Criar Artista" }
                     ol { +"POST - /album/criar                     - Criar Album" }
                     ol { +"POST - /musica/criar                    - Criar Musica" }
@@ -113,8 +84,6 @@ fun Route.meuindex() {
                     ol { +"GET - /artista/listar                  - Listar Artista" }
                     ol { +"GET - /album/listar                     - Listar Album" }
                     ol { +"GET - /musica/listar                   - Listar Musica" }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                 }
             }
         }
@@ -122,16 +91,6 @@ fun Route.meuindex() {
 }
 
 fun Route.criarArtista() {
-<<<<<<< Updated upstream
-    post("/artistas") {
-        val artistaParaCriar: Artista = call.receive<Artista>()
-        val artistaCriado = gravadora.cadastrarArtista(artistaParaCriar.nome!!)
-=======
-<<<<<<< Updated upstream
-    post("/artistas") {
-        val artistaParaCriar: Artista = call.receive<Artista>()
-        val artistaCriado = gravadora.cadastrarArtista(artistaParaCriar.nome!!)
-=======
     post("/artista/criar") {
         val artistaParaCriar: Artista = call.receive<Artista>()
         val artistaCriado = gravadora.cadastrarArtista(
@@ -141,25 +100,10 @@ fun Route.criarArtista() {
             artistaParaCriar.descricao!!,
             artistaParaCriar.link!!
         )
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         call.respond(artistaCriado)
     }
 }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-fun Route.listarArtista() {
-    get("/artistas") {
-        call.respond(gravadora.artistas)
-    }
-}
-
-<<<<<<< Updated upstream
-=======
-=======
 fun Route.criarAlbum() {
     post("/album/criar") {
         val albumParaCriar: Album = call.receive<Album>()
@@ -294,5 +238,3 @@ fun Route.listarMusica() {
         call.respond(gravadora.lista.musicasMutableList)
     }
 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
