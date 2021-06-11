@@ -17,8 +17,8 @@ class Gravadora {
     var administraContas: AdministraConta = AdministraConta()
 
 
-    fun login(email: String, senha: String, contas: MutableList<Profile>): Boolean{
-        currentProfile = contas.firstOrNull {p -> p.email == email && p.senha == senha}
+    fun login(email: String, senha: String): Boolean{
+        currentProfile = administraContas.contas.firstOrNull {p -> p.email == email && p.senha == senha}
         return currentProfile != null
     }
 
