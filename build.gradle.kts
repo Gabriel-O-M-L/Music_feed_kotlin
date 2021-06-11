@@ -27,6 +27,7 @@ tasks.withType<KotlinCompile>() {
 
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
 dependencies {

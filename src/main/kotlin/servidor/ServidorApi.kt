@@ -5,6 +5,7 @@ import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.html.*
+import account.Profile
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -12,7 +13,9 @@ import kotlinx.html.*
 import banco.artista.Artista
 import banco.lancamento.album.Album
 import banco.lancamento.musica.Musica
+import io.ktor.http.*
 import org.slf4j.event.Level
+import java.rmi.ServerError
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -65,6 +68,70 @@ fun Application.Gravadora(testing: Boolean = false) {
     }
 }
 
+fun Route.profile() {
+    get("/profile") {
+        val user = gravadora.currentProfile
+        if (user == null) {
+            val error = ServerError(HttpStatusCode.NotFound.value, "Usuário não encontrado")
+            call.respond(HttpStatusCode.NotFound, error)
+        } else {
+            call.respond(HttpStatusCode.OK, user)
+        }
+    }
+
+    post("/profile") {
+        val customer = call.receive<Profile>()
+
+        // Verifica se o e-mail foi envidado na requisição
+        if (customer.email == null) {
+            val error = ServerError(HttpStatusCode.BadRequest.value, "O E-MAIL é obrigatório para o cadastro!")
+            call.respond(HttpStatusCode.BadRequest, error)
+            return@post
+        }
+
+        if (customer.name == null) {
+            val error = ServerError(HttpStatusCode.BadRequest.value, "O NOME é obrigatório para o cadastro!")
+            call.respond(HttpStatusCode.BadRequest, error)
+            return@post
+        }
+
+        if (customer.senha == null) {
+            val error = ServerError(HttpStatusCode.BadRequest.value, "A SENHA é obrigatório para o cadastro!")
+            call.respond(HttpStatusCode.BadRequest, error)
+            return@post
+        }
+
+        gravadora.cadastraUsuarios(customer.name, customer.email, customer.senha)
+        call.respond(HttpStatusCode.Created)
+    }
+
+    post("/login") {
+        val customer = call.receive<Profile>()
+        // Verifica se o e-mail foi envidado na requisição
+        if (customer.email == null) {
+            val error = ServerError(HttpStatusCode.BadRequest.value, "O E-MAIL é obrigatório efetuar login!")
+            call.respond(HttpStatusCode.BadRequest, error)
+            return@post
+        }
+
+        if (customer.senha == null) {
+            val error = ServerError(HttpStatusCode.BadRequest.value, "A SENHA é obrigatório efetuar login!")
+            call.respond(HttpStatusCode.BadRequest, error)
+            return@post
+        }
+
+        val result = gravadora.login(customer.email, customer.senha)
+        if (!result) {
+            val error = ServerError(HttpStatusCode.BadRequest.value, "Não foi possível efetuar login. Por favor verifique os dados.")
+            call.respond(HttpStatusCode.BadRequest, error)
+            return@post
+        }
+
+        call.respond(HttpStatusCode.NoContent)
+    }
+
+}
+
 fun Route.meuindex() {
     get("/") {
         call.respondHtml {
@@ -89,6 +156,8 @@ fun Route.meuindex() {
         }
     }
 }
+
+
 
 fun Route.criarArtista() {
     post("/artista/criar") {

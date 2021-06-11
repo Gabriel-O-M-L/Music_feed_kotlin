@@ -1,3 +1,4 @@
+import account.Profile
 import banco.lancamento.album.Album
 import banco.artista.Artista
 import banco.lancamento.musica.Musica
@@ -11,6 +12,20 @@ class Gravadora {
     var objectAlbum: Album = Album()
     var objectMusica: Musica = Musica()
     var geradorDeNumerosRandomicos = Random(4665)
+    var currentProfile: Profile? = null
+    private val profiles = mutableListOf<Profile>()
+    var administraContas: AdministraConta = AdministraConta()
+
+
+    fun login(email: String, senha: String, contas: MutableList<Profile>): Boolean{
+        currentProfile = contas.firstOrNull {p -> p.email == email && p.senha == senha}
+        return currentProfile != null
+    }
+
+    fun cadastraUsuarios(name: String, email: String, senha: String){
+        administraContas.cadastraUsuario(name, email, senha)
+    }
+
 
 
     fun cadastrarArtista(nome: String, nacionalidade: String, foto: String, descricao: String,link : String): Artista {
