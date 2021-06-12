@@ -16,8 +16,7 @@ class Recomenda {
         while(iter.hasNext()) {
             item++
             if (item == 1) {
-                quantidade =
-                    favorites.artistasMutableList.count { it.tag == favorites.artistasMutableList.get(item).tag }
+                quantidade = favorites.artistasMutableList.count { it.tag == favorites.artistasMutableList.get(item).tag }
                 nomeTag = favorites.artistasMutableList.get(item).tag!!
             }
         }
