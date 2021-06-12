@@ -77,11 +77,11 @@ descricao: String,
 
 capa: String,
 
-artistaID: Int = ID do artista a ser editado
+artistaID: String = ID do artista a ser editado
 
 ## MUSICA:
 
-artistaID: Int, = ID do artista a ser editado
+artistaID: String, = ID do artista a ser editado
 
 nome: String,
 
@@ -101,7 +101,7 @@ albumID: Int = ID do album a ser ligado a musica
 
 nome: String,
 
-artistaID: Int, = ID do artisat a ser editado
+artistaID: String, = ID do artisat a ser editado
 
 nacionalidade: String,
 
@@ -117,9 +117,9 @@ nome: String,
 
 link: String,
 
-editID: Int, = ID do objeto a ser ligado a o objeto que vai ser editado
+editID: String, = ID do objeto a ser ligado a o objeto que vai ser editado
 
-objectID: Int, = ID do objeto a ser editado
+objectID: String, = ID do objeto a ser editado
 
 genero: String,
 
@@ -158,11 +158,11 @@ capa: String
 ## Sintaxe do JSON para deletar Objetos
 
 ## ARTISTA:
-objectID: Int = ID do objeto a ser editado
+objectID: String = ID do objeto a ser editado
 
 ## ALBUM:
-objectID: Int = ID do objeto a ser editado
+objectID: String = ID do objeto a ser editado
 
 ## MUSICA:
-objectID: Int = ID do objeto a ser editado
+objectID: String = ID do objeto a ser editado
 
