@@ -1,63 +1,45 @@
-import account.Login
+import account.ControleInterface
 import account.Profile
+import banco.artista.Artista
+import banco.lancamento.album.Album
+import banco.lancamento.musica.Musica
 import banco.listas.Listagem
+import recommend.Recomenda
 
-class AdministraConta {
+class AdministraConta: ControleInterface() {
 
+    var recomendados : Recomenda = Recomenda()
     var contas = mutableListOf<Profile>()
-    var objectLogin: Login = Login()
 
     fun cadastraUsuario(name: String, email: String, senha: String) {
         var p = Profile(name = name, email = email, senha = senha)
 
-        objectLogin.login(email, senha, contas)
         contas.add(p)
     }
 
-
-    fun editUser(idUser: Int, senha: String) {
-        //TODO
+    fun gostarMusica(findMusica: String, lista: Listagem, currentProfile: Profile?) {
+        val finder: Musica? = lista.musicasMutableList.find { it.nome == findMusica }
+        currentProfile!!.favorites.musicasMutableList.add(finder!!)
+        recomendados.recomendaMusica(currentProfile.favorites,lista)
     }
 
-    fun deletaUsuario(objectID: Int) {
-        //TODO
+    fun gostarAlbum(findAlbum: String, lista: Listagem, currentProfile: Profile?) {
+        val finder: Album? = lista.albunsMutableList.find { it.nome == findAlbum }
+        currentProfile!!.favorites.albunsMutableList.add(finder!!)
+        recomendados.recomendaAlbum(currentProfile.favorites,lista)
     }
 
-    fun gostarMusica(musicID: Int, lista: Listagem, idUser: Int) {
-        //TODO
+    fun gostarArtista(findNome: String, lista: Listagem, currentProfile: Profile?) {
+        val finder: Artista? = lista.artistasMutableList.find { it.nome == findNome }
+        currentProfile!!.favorites.artistasMutableList.add(finder!!)
+        recomendados.recomendaArtista(currentProfile.favorites,lista)
     }
 
-    fun gostarAlbum(albumID: Int, lista: Listagem, idUser: Int) {
-        //TODO
+    override fun editarInterface(nome: String, foto: String, id : String) {
+        val idFinderControleInterface: Profile? = contas.find { it.userId == id }
+
+        idFinderControleInterface?.name = nome
+        idFinderControleInterface?.foto = foto
     }
-
-    fun gostarArtista(artistaID: Int, lista: Listagem, idUser: Int) {
-        //TODO
-    }
-
-    /* TODO FUNCTION RECOMEND
-    fun recomendMusica(idUser: Int, lista: Listagem) {
-        var idfinderUsuario: Conta? = contasMutableList.find { it.userId == idUser }
-        var primeiro: String? = null
-        var segundo: String? = null
-        var terceiro: String? = null
-
-        idfinderUsuario?.musicasMutableList?.forEach {
-            var id: Int = it
-            var generoNome: String? = null
-            var genero = mutableListOf<Int>()
-            lista.musicasMutableList.forEach {
-                if (id == it.idMusica) {
-                    genero.add(id)
-                    generoNome = it.genero
-                } else {
-                    if (generoNome == it.genero) {
-                        genero.add(it.idMusica)
-                    }
-                }
-            }
-        }
-
-    }
-     */
 }
+

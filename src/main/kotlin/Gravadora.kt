@@ -1,71 +1,62 @@
+import account.ControleInterface
 import account.Profile
-import banco.lancamento.album.Album
 import banco.artista.Artista
+import banco.lancamento.album.Album
 import banco.lancamento.musica.Musica
 import banco.listas.Listagem
+import java.util.*
 import kotlin.random.Random
 
-class Gravadora {
+class Gravadora: ControleInterface() {
 
     var lista: Listagem = Listagem()
     var objectArtista: Artista = Artista()
-    var objectAlbum: Album = Album()
-    var objectMusica: Musica = Musica()
-    var geradorDeNumerosRandomicos = Random(4665)
+    var geradorDeNumerosRandomicos: String? = UUID.randomUUID().toString()
     var currentProfile: Profile? = null
-    private val profiles = mutableListOf<Profile>()
     var administraContas: AdministraConta = AdministraConta()
 
 
-    fun login(email: String, senha: String): Boolean{
-        currentProfile = administraContas.contas.firstOrNull {p -> p.email == email && p.senha == senha}
+    fun login(email: String, senha: String): Boolean {
+        currentProfile = administraContas.contas.firstOrNull { p -> p.email == email && p.senha == senha }
         return currentProfile != null
     }
 
-    fun cadastraUsuarios(name: String, email: String, senha: String){
+    fun cadastraUsuarios(name: String, email: String, senha: String) {
         administraContas.cadastraUsuario(name, email, senha)
     }
 
 
-
-    fun cadastrarArtista(nome: String, nacionalidade: String, foto: String, descricao: String,link : String): Artista {
-        var artista: Artista = Artista()
+    fun cadastrarArtista(
+        nome: String,
+        nacionalidade: String,
+        foto: String,
+        tag: String,
+        descricao: String,
+        link: String
+    ): Artista {
+        val artista: Artista = Artista()
 
         artista.foto = foto
-        artista.idArtista = geradorDeNumerosRandomicos.nextInt()
+        artista.idArtista = geradorDeNumerosRandomicos
         artista.nome = nome
         artista.nacionalidade = nacionalidade
         artista.descricao = descricao
         artista.link = link
+        artista.tag = tag
         lista.artistasMutableList.add(artista)
         return artista
     }
 
     fun criaMusica(
-        artistaID: Int,
+        artistaID: String?,
         nome: String,
         link: String,
         duracao: String,
         produtor: String,
         descricao: String,
-        albumID: Int
-    ): Musica {
-        val musica: Musica = Musica()
-
-        val idFinderAlbum: Album? = lista.albunsMutableList.find { it.idAlbum == albumID }
-        val idFinderArtista: Artista? = lista.artistasMutableList.find { it.idArtista == artistaID }
-
-        musica.artista = idFinderArtista
-        musica.descricao = descricao
-        musica.duracao = duracao
-        musica.produtor = produtor
-        musica.album = idFinderAlbum
-        musica.nome = nome
-        musica.link = link
-        musica.idMusica = geradorDeNumerosRandomicos.nextInt()
-
-        lista.musicasMutableList.add(musica)
-        return musica
+        albumID: String?
+    ) {
+        objectArtista.criaMusica(artistaID, nome, link, duracao, produtor, descricao, albumID, lista)
     }
 
     fun criarAlbum(
@@ -77,44 +68,32 @@ class Gravadora {
         compositores: String,
         descricao: String,
         capa: String,
-        artistaID: Int
-    ): Album {
-        val album: Album = Album()
-
-        val idFinder: Artista? = lista.artistasMutableList.find { it.idArtista == artistaID }
-
-        album.artista = idFinder
-        album.link = link
-        album.nome = nome
-        album.genero = genero
-        album.duracao = duracao
-        album.produtor = produtor
-        album.compositores = compositores
-        album.descricao = descricao
-        album.capa = capa
-
-        album.idAlbum = geradorDeNumerosRandomicos.nextInt()
-
-        lista.albunsMutableList.add(album)
-        return album
+        artistaID: String?
+    ) {
+        objectArtista.criarAlbum(nome, link, genero, duracao, produtor, compositores, descricao, capa, artistaID, lista)
     }
 
-    fun editArtista(
-        nome: String,
-        artistaID: Int,
-        nacionalidade: String,
-        descricao: String,
-        foto: String,
-        link: String
-    ) {
-        objectArtista.edit(nome, link, artistaID, nacionalidade, descricao, foto, lista)
+    fun editArtista(link: String, artistaID: String, nacionalidade: String, descricao: String, tag: String) {
+        val idFinderArtista: Artista? = lista.artistasMutableList.find { it.idArtista == artistaID }
+
+        idFinderArtista?.nacionalidade = nacionalidade
+        idFinderArtista?.link = link
+        idFinderArtista?.descricao = descricao
+        idFinderArtista?.tag = tag
+    }
+
+    override fun editarInterface(nome: String, foto: String,id: String ) {
+        val idFinderControleInterface: Artista? = lista.artistasMutableList.find { it.idArtista == id }
+
+        idFinderControleInterface?.nome = nome
+        idFinderControleInterface?.foto = foto
     }
 
     fun editAlbum(
         nome: String,
         link: String,
-        editID: Int,
-        objectID: Int,
+        editID: String?,
+        objectID: String?,
         genero: String,
         descricao: String,
         compositores: String,
@@ -122,7 +101,7 @@ class Gravadora {
         produtor: String,
         capa: String
     ) {
-        objectAlbum.editar(
+        objectArtista.editarAlbum(
             nome,
             link,
             editID,
@@ -140,8 +119,8 @@ class Gravadora {
     fun editMusica(
         nome: String,
         link: String,
-        editID: Int,
-        objectID: Int,
+        editID: String?,
+        objectID: String?,
         genero: String,
         descricao: String,
         compositores: String,
@@ -149,7 +128,7 @@ class Gravadora {
         produtor: String,
         capa: String
     ) {
-        objectMusica.editar(
+        objectArtista.editarMusica(
             nome,
             link,
             editID,
@@ -164,20 +143,40 @@ class Gravadora {
         )
     }
 
-    fun deleteArtista(objectID: Int) {
+    fun deleteArtista(objectID: String?) {
         val idFinderArtista: Artista? = lista.artistasMutableList.find { it.idArtista == objectID }
         lista.artistasMutableList.remove(idFinderArtista)
     }
 
-    fun deleteAlbum(objectID: Int) {
-        val idFinderAlbum: Album? = lista.albunsMutableList.find { it.idAlbum == objectID }
-        lista.albunsMutableList.remove(idFinderAlbum)
+    fun deleteAlbum(objectID: String?) {
+        objectArtista.deleteAlbum(objectID, lista)
     }
 
-    fun deleteMusica(objectID: Int) {
-        val idFinderMusica: Musica? = lista.musicasMutableList.find { it.idMusica == objectID }
-        lista.musicasMutableList.remove(idFinderMusica)
+    fun deleteMusica(objectID: String?) {
+        objectArtista.deleteMusica(objectID, lista)
     }
 
+    fun gostaMusica(findMusica: String) {
+        administraContas.gostarMusica(findMusica, lista, currentProfile)
+    }
 
+    fun gostaAlbum(findAlbum: String) {
+        administraContas.gostarAlbum(findAlbum, lista, currentProfile)
+    }
+
+    fun gostaArtista(findArtista: String) {
+        administraContas.gostarMusica(findArtista, lista, currentProfile)
+    }
+
+    fun buscarMusica(nome: String): List<Musica> {
+        return lista.musicasMutableList.filter { it.nome == nome }
+    }
+
+    fun buscarAlbum(nome: String): List<Album> {
+        return lista.albunsMutableList.filter { it.nome == nome }
+    }
+
+    fun buscarArtista(nome: String): List<Artista> {
+        return lista.artistasMutableList.filter { it.nome == nome }
+    }
 }

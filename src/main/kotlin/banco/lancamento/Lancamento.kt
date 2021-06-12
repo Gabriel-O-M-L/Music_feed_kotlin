@@ -14,8 +14,6 @@ abstract class Lancamento {
     var compositores: String? = null
     var link: String? = null
     var capa: String? = null
-    var albumID: Int? = null
-    var artistaID: Int? = null
-
-    abstract fun editar(nome: String, link: String, editID: Int, objectID: Int, genero: String, descricao: String, compositores: String, lista: Listagem, duracao: String, produtor: String, capa: String)
+    var albumID: String? = null
+    var artistaID: String? = null
 }

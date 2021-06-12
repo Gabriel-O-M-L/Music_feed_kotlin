@@ -53,6 +53,7 @@ fun Application.Gravadora(testing: Boolean = false) {
      */
     routing {
         meuindex()
+        profile()
         criarArtista()
         criarAlbum()
         criarMusica()
@@ -65,6 +66,31 @@ fun Application.Gravadora(testing: Boolean = false) {
         listarArtista()
         listarAlbum()
         listarMusica()
+    }
+}
+
+fun Route.meuindex() {
+    get("/") {
+        call.respondHtml {
+            body {
+                h1 { +"API de Gravadora 1.0" }
+                p { +"Tente chamar os outros endpoints para executar operações" }
+                ul {
+                    ol { +"POST - /artista/criar                  - Criar Artista" }
+                    ol { +"POST - /album/criar                     - Criar Album" }
+                    ol { +"POST - /musica/criar                    - Criar Musica" }
+                    ol { +"PATCH - /artista/editar                - Editar Artista" }
+                    ol { +"PATCH - /album/editar                   - Editar Album" }
+                    ol { +"PATCH - /musica/editar                  - Editar Musica" }
+                    ol { +"DELETE - /artista/deletar              - Deletar Artista" }
+                    ol { +"DELETE - /album/deletar                 - Deletar Album" }
+                    ol { +"DELETE - /musica/deletar                - Deletar Musica" }
+                    ol { +"GET - /artista/listar                  - Listar Artista" }
+                    ol { +"GET - /album/listar                     - Listar Album" }
+                    ol { +"GET - /musica/listar                   - Listar Musica" }
+                }
+            }
+        }
     }
 }
 
@@ -132,31 +158,6 @@ fun Route.profile() {
 
 }
 
-fun Route.meuindex() {
-    get("/") {
-        call.respondHtml {
-            body {
-                h1 { +"API de Gravadora 1.0" }
-                p { +"Tente chamar os outros endpoints para executar operações" }
-                ul {
-                    ol { +"POST - /artista/criar                  - Criar Artista" }
-                    ol { +"POST - /album/criar                     - Criar Album" }
-                    ol { +"POST - /musica/criar                    - Criar Musica" }
-                    ol { +"PATCH - /artista/editar                - Editar Artista" }
-                    ol { +"PATCH - /album/editar                   - Editar Album" }
-                    ol { +"PATCH - /musica/editar                  - Editar Musica" }
-                    ol { +"DELETE - /artista/deletar              - Deletar Artista" }
-                    ol { +"DELETE - /album/deletar                 - Deletar Album" }
-                    ol { +"DELETE - /musica/deletar                - Deletar Musica" }
-                    ol { +"GET - /artista/listar                  - Listar Artista" }
-                    ol { +"GET - /album/listar                     - Listar Album" }
-                    ol { +"GET - /musica/listar                   - Listar Musica" }
-                }
-            }
-        }
-    }
-}
-
 
 
 fun Route.criarArtista() {
@@ -166,6 +167,7 @@ fun Route.criarArtista() {
             artistaParaCriar.nome!!,
             artistaParaCriar.nacionalidade!!,
             artistaParaCriar.foto!!,
+            artistaParaCriar.tag!!,
             artistaParaCriar.descricao!!,
             artistaParaCriar.link!!
         )
@@ -211,12 +213,11 @@ fun Route.editarArtista() {
     patch("/artista/editar") {
         val artistaParaEditar: Artista = call.receive<Artista>()
         val artistaEditado = gravadora.editArtista(
-            artistaParaEditar.nome!!,
+            artistaParaEditar.link!!,
             artistaParaEditar.idArtista!!,
             artistaParaEditar.nacionalidade!!,
             artistaParaEditar.descricao!!,
-            artistaParaEditar.foto!!,
-            artistaParaEditar.link!!
+            artistaParaEditar.tag!!
         )
         call.respond(artistaEditado)
     }
@@ -306,4 +307,9 @@ fun Route.listarMusica() {
     get("/musica/listar") {
         call.respond(gravadora.lista.musicasMutableList)
     }
+}
+
+fun Route.gostarMusica()
+{
+
 }
