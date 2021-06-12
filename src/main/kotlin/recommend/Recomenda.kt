@@ -15,8 +15,11 @@ class Recomenda {
         var iter = favorites.artistasMutableList.listIterator()
         while(iter.hasNext()) {
             item++
-            quantidade = favorites.artistasMutableList.count{it.tag == favorites.artistasMutableList.get(item).tag}
-            nomeTag = favorites.artistasMutableList.get(item).tag!!
+            if (item == 1) {
+                quantidade =
+                    favorites.artistasMutableList.count { it.tag == favorites.artistasMutableList.get(item).tag }
+                nomeTag = favorites.artistasMutableList.get(item).tag!!
+            }
         }
         quantidadeTemp = favorites.artistasMutableList.count{it.tag == favorites.artistasMutableList.get(item).tag}
 
