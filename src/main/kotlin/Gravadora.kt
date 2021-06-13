@@ -11,7 +11,6 @@ class Gravadora: ControleInterface() {
 
     var lista: Listagem = Listagem()
     var objectArtista: Artista = Artista()
-    var geradorDeNumerosRandomicos: String? = UUID.randomUUID().toString()
     var currentProfile: Profile? = null
     var administraContas: AdministraConta = AdministraConta()
 
@@ -41,7 +40,7 @@ class Gravadora: ControleInterface() {
         val artista: Artista = Artista()
 
         artista.foto = foto
-        artista.idArtista = geradorDeNumerosRandomicos
+        artista.idArtista = = UUID.randomUUID().toString()
         artista.nome = nome
         artista.nacionalidade = nacionalidade
         artista.descricao = descricao
