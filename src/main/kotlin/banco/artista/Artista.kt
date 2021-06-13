@@ -10,7 +10,7 @@ import kotlin.random.Random
 
  class Artista{
 
-     var idArtista: String? = null
+     var idArtista: String? = UUID.randomUUID().toString()
      var nacionalidade: String? = null
      var descricao: String? = null
      var link: String? = null

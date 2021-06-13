@@ -66,6 +66,11 @@ fun Application.Gravadora(testing: Boolean = false) {
         listarArtista()
         listarAlbum()
         listarMusica()
+        buscarArtista()
+        buscarMusica()
+        buscarAlbum()
+        //editarInterfaceArtista()
+        //editarInterfaceUsuario()
     }
 }
 
@@ -88,6 +93,9 @@ fun Route.meuindex() {
                     ol { +"GET - /artista/listar                  - Listar Artista" }
                     ol { +"GET - /album/listar                     - Listar Album" }
                     ol { +"GET - /musica/listar                   - Listar Musica" }
+                    ol { +"POST - /artista/buscar                   - Buscar Artista" }
+                    ol { +"POST - /album/buscar                   -  Buscar Album" }
+                    ol { +"POST - /musica/buscar                   - Buscar Musica" }
                 }
             }
         }
@@ -309,7 +317,51 @@ fun Route.listarMusica() {
     }
 }
 
-fun Route.gostarMusica()
-{
-
+fun Route.buscarArtista() {
+    post("/artista/buscar"){
+        val buscandoArtista : Artista = call.receive<Artista>()
+        val artistaEncontrado = gravadora.buscarArtista(
+            buscandoArtista.nome!!
+        )
+        call.respond(artistaEncontrado)
+    }
 }
+fun Route.buscarMusica() {
+    post("/musica/buscar"){
+        val buscandoMusica : Musica = call.receive<Musica>()
+        val musicaEncontrada = gravadora.buscarMusica(
+            buscandoMusica.nome!!
+        )
+        call.respond(musicaEncontrada)
+    }
+}
+fun Route.buscarAlbum() {
+    post("/album/buscar"){
+        val buscandoAlbum : Album = call.receive<Album>()
+        val albumEncontrado = gravadora.buscarAlbum(
+            buscandoAlbum.nome!!
+        )
+        call.respond(albumEncontrado)
+    }
+}
+//fun Route.editarInterfaceArtista()
+//{
+   // patch("/editar/interfaceArtista"){
+        //val artistaParaEditar: Artista = call.receive<Artista>()
+        //val artistaEditada = gravadora.editarInterface(
+          //  artistaParaEditar.nome!!,
+        //    artistaParaEditar.foto!!,
+      //      artistaParaEditar.idArtista!!
+    //    )
+  //  }
+//}
+//fun Route.editarInterfaceUsuario(){
+  //  patch("/editar/interfaceUsuario"){
+    //    val usuarioParaEditar: Profile = call.receive<Profile>()
+       // val usuarioEditada = gravadora.editarInterfaceUsuario(
+         //   usuarioParaEditar.name!!,
+           // usuarioParaEditar.foto!!,
+            //usuarioParaEditar.userId!!
+        //)
+    //}
+ //}

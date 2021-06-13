@@ -25,6 +25,10 @@ class Gravadora: ControleInterface() {
         administraContas.cadastraUsuario(name, email, senha)
     }
 
+    fun editarInterfaceUsuario(nome: String, foto: String,id: String){
+        administraContas.editarInterface(nome, foto, id)
+    }
+
 
     fun cadastrarArtista(
         nome: String,
