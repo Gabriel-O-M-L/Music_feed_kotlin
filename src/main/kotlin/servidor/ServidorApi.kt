@@ -69,8 +69,8 @@ fun Application.Gravadora(testing: Boolean = false) {
         buscarArtista()
         buscarMusica()
         buscarAlbum()
-        //editarInterfaceArtista()
-        //editarInterfaceUsuario()
+        editarInterfaceArtista()
+        editarInterfaceUsuario()
     }
 }
 
@@ -344,24 +344,24 @@ fun Route.buscarAlbum() {
         call.respond(albumEncontrado)
     }
 }
-//fun Route.editarInterfaceArtista()
-//{
-   // patch("/editar/interfaceArtista"){
-        //val artistaParaEditar: Artista = call.receive<Artista>()
-        //val artistaEditada = gravadora.editarInterface(
-          //  artistaParaEditar.nome!!,
-        //    artistaParaEditar.foto!!,
-      //      artistaParaEditar.idArtista!!
-    //    )
-  //  }
-//}
-//fun Route.editarInterfaceUsuario(){
-  //  patch("/editar/interfaceUsuario"){
-    //    val usuarioParaEditar: Profile = call.receive<Profile>()
-       // val usuarioEditada = gravadora.editarInterfaceUsuario(
-         //   usuarioParaEditar.name!!,
-           // usuarioParaEditar.foto!!,
-            //usuarioParaEditar.userId!!
-        //)
-    //}
- //}
+fun Route.editarInterfaceArtista()
+{
+    patch("/editar/interfaceArtista"){
+        val artistaParaEditar: Artista = call.receive<Artista>()
+        val artistaEditada = gravadora.editarInterface(
+            artistaParaEditar.nome!!,
+            artistaParaEditar.foto!!,
+            artistaParaEditar.idArtista!!
+        )
+    }
+}
+fun Route.editarInterfaceUsuario(){
+    patch("/editar/interfaceUsuario"){
+        val usuarioParaEditar: Profile = call.receive<Profile>()
+        val usuarioEditada = gravadora.editarInterfaceUsuario(
+            usuarioParaEditar.name!!,
+            usuarioParaEditar.foto!!,
+            usuarioParaEditar.userId!!
+        )
+    }
+ }
