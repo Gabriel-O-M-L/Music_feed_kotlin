@@ -3,8 +3,8 @@
 ## IESB Progamação orientada a Objetos 2021
 
 ## Ambiente
-Api roda em kotlin com integração do Ktor pela IDE IntelliJ IdeaC, o intrumento de Build usado foi o Kotlin Groovy ja integrado na IDE, A api usara arquivos do tipo JSON,
-O progama de teste para as rotas sera o POSTMAN
+API roda em kotlin com integração do Ktor pela IDE IntelliJ IdeaC, o intrumento de Build usado foi o Kotlin Groovy ja integrado na IDE, A api usara arquivos do tipo JSON,
+O progama de teste para as rotas sera o POSTMAN, um servidor em nuvem que sera utilizado sera o heroku
 
 ## Membros
 1. Gabriel Oliveira Moura Lima 1912130050
@@ -20,7 +20,19 @@ O progama de teste para as rotas sera o POSTMAN
 A api possue atualmente 6 classes, 3 que serão acessadas diretamente pelo usuario, utilizando funções para, criar objetos, modificar objetos e deletar objetos.
 As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
 
+OBS: a classe ControleInterface foi criada somente para demonstrar a utilização do polimorfismo
+
+## Apesar de existir rotas para login e criação de usuario, não há utilidade estabelecida no momento, pois a utilização destas classes esta delegada a funções que não usam de chamadas no servidor. Caso queira entender como sera usado o objeto de usuario, entr nas classes AdministraConta e no pacote recommend
+
 ## Rotas
+"POST - /profile                         - Cria um usuario" 
+
+"GET - /profile                          - Confere se um Usuario foi encontado" 
+
+"POST - /login                           - Entra em um usuario" 
+
+"PATCH - /editar/interfaceUsuario        - Edita Aspectos visuais de um usuario"
+
 "POST - /artista/criar                   - Criar Artista"
 
 "POST - /album/criar                     - Criar Album"
@@ -28,6 +40,8 @@ As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
 "POST - /musica/criar                    - Criar Musica"
 
 "PATCH - /artista/editar                 - Editar Artista"
+
+"PATCH - /editar/interfaceArtista        - Edita Aspectos visuais de um artista"
 
 "PATCH - /album/editar                   - Editar ALbum"
 
@@ -45,7 +59,21 @@ As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
 
 "GET - /musica/listar                    - Listar Musica"
 
+"POST - /artista/buscar                  - Buscar Artista" 
+
+"POST - /album/buscar                    -  Buscar Album" 
+
+"POST - /musica/buscar                   - Buscar Musica" 
+
 ## Sintaxe do JSON para criar objetos
+
+## Usuario:
+
+email: String,
+
+name: String,
+
+senha: String
 
 ## ARTISTA:
 
@@ -54,6 +82,8 @@ nome: String,
 nacionalidade: String,
 
 foto: String,
+
+tag: String
 
 descricao: String
 
@@ -95,11 +125,23 @@ descricao: String,
 
 albumID: Int = ID do album a ser ligado a musica
 
+## Sintaxe de login:
+
+email: String,
+
+senha: String
+
 ## Sintaxe do JSON para editar objetos
 
-## ARTISTA:
+## Usuario
 
-nome: String,
+name: String,
+
+foto: String,
+
+idArtista: String
+
+## ARTISTA:
 
 artistaID: String, = ID do artisat a ser editado
 
@@ -107,9 +149,17 @@ nacionalidade: String,
 
 descricao: String,
 
+link: String,
+
+tag: String
+
+## Artista Interface:
+
+nome: String,
+
 foto: String,
 
-link: String
+idArtista: String
 
 ## ALBUM:
 
@@ -165,4 +215,18 @@ objectID: String = ID do objeto a ser editado
 
 ## MUSICA:
 objectID: String = ID do objeto a ser editado
+
+## Sintaxe da Busca de objeto
+
+## ARTISTA:
+
+nome: String
+
+## ALBUM:
+
+nome: String
+
+## MUSICA:
+
+nome: String
 
