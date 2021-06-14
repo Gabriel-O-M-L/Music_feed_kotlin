@@ -10,7 +10,7 @@ import kotlin.random.Random
 
  class Artista{
 
-     var idArtista: String? = = UUID.randomUUID().toString()
+     var idArtista: String? = UUID.randomUUID().toString()
      var nacionalidade: String? = null
      var descricao: String? = null
      var link: String? = null
@@ -42,7 +42,7 @@ import kotlin.random.Random
         musica.album = idFinderAlbum
         musica.nome = nome
         musica.link = link
-        musica.idMusica = = UUID.randomUUID().toString()
+        musica.idMusica = UUID.randomUUID().toString()
 
         lista.musicasMutableList.add(musica)
         return musica

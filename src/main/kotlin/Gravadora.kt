@@ -40,7 +40,7 @@ class Gravadora: ControleInterface() {
         val artista: Artista = Artista()
 
         artista.foto = foto
-        artista.idArtista = = UUID.randomUUID().toString()
+        artista.idArtista = UUID.randomUUID().toString()
         artista.nome = nome
         artista.nacionalidade = nacionalidade
         artista.descricao = descricao
