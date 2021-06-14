@@ -81,10 +81,16 @@ fun Route.meuindex() {
                 h1 { +"API de Gravadora 1.0" }
                 p { +"Tente chamar os outros endpoints para executar operações" }
                 ul {
+                    ol { +"POST - /profile                   - Cria um usuario" }
+                    ol { +"GET - /profile                   - Confere se um Usuario foi encontado" }
+                    ol { +"POST - /login                   - Entra em um usuario" }
+                    ol { +"PATCH - /editar/interfaceUsuario         - Edita Aspectos visuais de um usuario" }
+                    ol { +"POST - /musica/buscar                   - Buscar Musica" }
                     ol { +"POST - /artista/criar                  - Criar Artista" }
                     ol { +"POST - /album/criar                     - Criar Album" }
                     ol { +"POST - /musica/criar                    - Criar Musica" }
                     ol { +"PATCH - /artista/editar                - Editar Artista" }
+                    ol { +"PATCH - /editar/interfaceArtista         - Edita Aspectos visuais de um artista" }
                     ol { +"PATCH - /album/editar                   - Editar Album" }
                     ol { +"PATCH - /musica/editar                  - Editar Musica" }
                     ol { +"DELETE - /artista/deletar              - Deletar Artista" }
