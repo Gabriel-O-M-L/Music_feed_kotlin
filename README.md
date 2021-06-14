@@ -12,7 +12,7 @@ O progama de teste para as rotas sera o POSTMAN, um servidor em nuvem que sera u
 ## Membros
 1. Gabriel Oliveira Moura Lima 1912130050
 2. Gabriel Bezerra dos Santos 1822130051
-3. Frederico Paixão Soares Coqueiro 1912072026
+3. Frederico Paixão Soares Coqueiro 1912082026
 4. Hiel Alves Rocha 1822130018
 
 ## Linguagem usada **Koltin**
