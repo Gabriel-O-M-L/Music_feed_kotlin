@@ -21,7 +21,7 @@ O progama de teste para as rotas sera o POSTMAN, um servidor em nuvem que sera u
 ## Descriçao
 
 A api possue atualmente 6 classes, 3 que serão acessadas diretamente pelo usuario, utilizando funções para, criar objetos, modificar objetos e deletar objetos.
-As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN
+As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN ou outro aplicativo de requests HTTP.
 
 OBS: a classe ControleInterface foi criada somente para demonstrar a utilização do polimorfismo
 
