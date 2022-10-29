@@ -6,7 +6,7 @@
 ## IESB Progamação orientada a Objetos 2021
 
 ## Ambiente
-API roda em kotlin com integração do Ktor pela IDE IntelliJ IdeaC, o intrumento de Build usado foi o Kotlin Groovy ja integrado na IDE, A api usara arquivos do tipo JSON,
+API roda em kotlin com utilizando a framework Ktor, API rest, arquivos do tipo JSON,
 O progama de teste para as rotas sera o POSTMAN, um servidor em nuvem que sera utilizado sera o heroku
 
 ## Membros
@@ -17,10 +17,9 @@ O progama de teste para as rotas sera o POSTMAN, um servidor em nuvem que sera u
 
 ## Linguagem usada **Koltin**
 
-
 ## Descriçao
 
-A api possue atualmente 6 classes, 3 que serão acessadas diretamente pelo usuario, utilizando funções para, criar objetos, modificar objetos e deletar objetos.
+A API possue atualmente 6 classes, 3 que serão acessadas diretamente pelo usuario, utilizando funções para, criar objetos, modificar objetos e deletar objetos.
 As funções serão acessadas por rotas, enviadas pelo aplicativo POSTMAN ou outro aplicativo de requests HTTP.
 
 OBS: a classe ControleInterface foi criada somente para demonstrar a utilização do polimorfismo
